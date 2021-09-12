@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 long int getEOF(FILE* file)
 {
@@ -10,6 +11,13 @@ long int getEOF(FILE* file)
 
 int main(int argc, char** argv)
 {
-	printf("Hello, World!\n");
-	return 0;
+	FILE* infile = fopen("programs/Add.asm", "r");
+
+	if (infile == NULL) {
+		printf("Error! Couldn't open file\n");
+		exit(EXIT_FAILURE);
+	}
+
+	fclose(infile);
+	exit(EXIT_SUCCESS);
 }
