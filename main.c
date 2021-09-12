@@ -21,7 +21,13 @@ int main(int argc, char** argv)
 
 	long int eof = getEOF(infile);
 	while (ftell(infile) != eof) {
-		hkReadToken(infile);
+		HkToken token = hkReadToken(infile);
+
+		if (token.data != NULL) {
+			printf("Read: %s\n", token.data);
+			// prevent memory leaks during testing
+			free(token.data);
+		}
 	}
 
 	fclose(infile);
