@@ -18,6 +18,12 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 
+	long int eof = getEOF(infile);
+	while (ftell(infile) != eof) {
+		char c = fgetc(infile);
+		printf("%c", c);
+	}
+
 	fclose(infile);
 	exit(EXIT_SUCCESS);
 }
