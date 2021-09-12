@@ -1,6 +1,9 @@
 #ifndef HACK_TOKENS_H
 #define HACK_TOKENS_H
 
+#include <stdio.h>
+
+
 /**
  * Represents the differents types of tokens.
  */
@@ -30,5 +33,7 @@ struct HkToken_t {
 
 typedef struct HkToken_t HkToken;
 
+
+HkToken hkReadToken(FILE *file);
 
 #endif /* HACK_TOKENS_H */
