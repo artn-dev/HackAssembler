@@ -1,11 +1,14 @@
 CC := gcc
 CFLAGS := -Wall -Wextra
 
-HackAssembler: main.o
+HackAssembler: main.o tokens.o
 	$(CC) $^ -o HackAssembler $(CFLAGS)
 
-main.o: main.c
+main.o: main.c tokens.h
 	$(CC) main.c -c $(CFLAGS)
+
+tokens.o: tokens.c tokens.h
+	$(CC) tokens.c -c $(CFLAGS)
 
 .PHONY: clean
 clean:
