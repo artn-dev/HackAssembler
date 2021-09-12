@@ -10,6 +10,7 @@
 enum HkTokenType {
         HK_WHITESPACE,
         HK_OPERATOR,
+        HK_INTEGER_LITERAL,
 };
 
 /**
