@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "tokens.h"
 
 long int getEOF(FILE* file)
 {
@@ -20,8 +21,7 @@ int main(int argc, char** argv)
 
 	long int eof = getEOF(infile);
 	while (ftell(infile) != eof) {
-		char c = fgetc(infile);
-		printf("%c", c);
+		hkReadToken(infile);
 	}
 
 	fclose(infile);
