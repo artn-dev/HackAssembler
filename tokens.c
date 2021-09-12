@@ -65,6 +65,30 @@ HkToken hkReadToken(FILE *file)
                 fread(token.data, sizeof(char), digitCount, file);
                 }
                 break;
+
+        default: {
+                if (!(isalpha(currCh) || currCh == '_'))
+                        break;
+
+                token.type = HK_IDENTIFIER;
+
+                // find number of characters
+                long int charCount = 0;
+                do {
+                        ++charCount;
+                        currCh = fgetc(file);
+                } while (isalpha(currCh) || isdigit(currCh) || currCh == '_');
+
+                // allocate memory in string
+                token.data = (char*)malloc(charCount + 1);
+
+                // return to beginning of number
+                long int offset = (currCh == EOF) ? 0 : 1;
+                fseek(file, -charCount - offset, SEEK_CUR);
+
+                // read digits
+                fread(token.data, sizeof(char), charCount, file);
+                }
         }
 
         return token;
