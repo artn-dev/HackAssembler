@@ -21,6 +21,11 @@ HkToken hkReadToken(FILE *file)
                 } while (currCh != '\n' && currCh != '\r' && currCh != EOF);
                 break;
 
+        case '\n':
+        case '\r':
+                token.type = HK_END_OF_STATEMENT;
+                break;
+
         case '@':
         case '+':
         case '=':
