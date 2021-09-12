@@ -44,7 +44,7 @@ HkToken hkReadToken(FILE *file)
         case '6':
         case '7':
         case '8':
-        case '9':
+        case '9': {
                 token.type = HK_INTEGER_LITERAL;
 
                 // find number of digits
@@ -63,7 +63,7 @@ HkToken hkReadToken(FILE *file)
 
                 // read digits
                 fread(token.data, sizeof(char), digitCount, file);
-
+                }
                 break;
         }
 
