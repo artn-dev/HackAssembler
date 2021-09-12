@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define isdigit(x) (48 <= (int)(x) && (int)(x) <= 57)
+#define isdigit(x) ('0' <= (x) && (x) <= '9')
 #define isalpha(x) (('a' <= (x) && (x) <= 'z') || ('A' <= (x) && (x) <= 'Z'))
 
 
