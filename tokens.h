@@ -12,6 +12,7 @@ enum HkTokenType {
         HK_OPERATOR,
         HK_INTEGER_LITERAL,
         HK_IDENTIFIER,
+        HK_END_OF_STATEMENT,
 };
 
 /**
