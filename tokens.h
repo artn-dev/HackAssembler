@@ -9,6 +9,7 @@
  */
 enum HkTokenType {
         HK_WHITESPACE,
+        HK_OPERATOR,
 };
 
 /**
