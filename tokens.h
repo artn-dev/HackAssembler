@@ -45,7 +45,7 @@ typedef struct _HkTokenListNode {
 
 /**
  * Linked list of tokens.
- * This lists holds the tokens found by the program. All it's
+ * This lists holds the tokens found by the program. All its
  * operations are to be made with helper functions.
  */
 typedef struct HkTokenList {
