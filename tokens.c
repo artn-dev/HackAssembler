@@ -98,3 +98,11 @@ HkToken hkReadToken(FILE *file)
 
         return token;
 }
+
+HkTokenList hkCreateTokenList()
+{
+        HkTokenList list;
+        list.head = NULL;
+        list.tail = NULL;
+        return list;
+}

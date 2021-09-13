@@ -54,6 +54,14 @@ typedef struct HkTokenList {
 } HkTokenList;
 
 
+/**
+ * Creates list of tokens.
+ * Creates and initializes a instance of 'HkTokenList'.
+ * @see HkTokenList
+ * @return a instance of 'HkTokenList'
+ */
+HkTokenList hkCreateTokenList();
+
 HkToken hkReadToken(FILE *file);
 
 #endif /* HACK_TOKENS_H */
