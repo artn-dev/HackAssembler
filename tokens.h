@@ -62,6 +62,15 @@ typedef struct HkTokenList {
  */
 HkTokenList hkCreateTokenList();
 
+/**
+ * Add new token to list.
+ * Creates a new node in the linked list and initializes its
+ * data to 'token'.
+ * @param list list object to insert token
+ * @param token new value to be inserter
+ */
+void hkAddToken(HkTokenList *list, HkToken token);
+
 HkToken hkReadToken(FILE *file);
 
 #endif /* HACK_TOKENS_H */

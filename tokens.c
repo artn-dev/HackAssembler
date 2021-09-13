@@ -106,3 +106,22 @@ HkTokenList hkCreateTokenList()
         list.tail = NULL;
         return list;
 }
+
+void hkAddToken(HkTokenList *list, HkToken token)
+{
+        _HkTokenListNode *newToken;
+
+        // first insertion
+        if (list->head == NULL) {
+                list->head = (_HkTokenListNode*)malloc(sizeof(_HkTokenListNode));
+                list->tail = list->head;
+                newToken = list->tail;
+        } else {
+                list->tail->next = (_HkTokenListNode*)malloc(sizeof(_HkTokenListNode));
+                newToken = list->tail->next;
+        }
+
+        newToken->data = token;
+        newToken->next = NULL;
+        list->tail = newToken;
+}
