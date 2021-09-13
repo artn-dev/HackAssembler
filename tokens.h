@@ -39,7 +39,7 @@ typedef struct HkToken {
  * Node of a linked list of tokens.
  */
 typedef struct _HkTokenListNode {
-        _HkTokenListNode *next;
+        struct _HkTokenListNode *next;
         HkToken data;
 } _HkTokenListNode; 
 
