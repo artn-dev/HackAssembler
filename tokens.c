@@ -125,3 +125,18 @@ void hkAddToken(HkTokenList *list, HkToken token)
         newToken->next = NULL;
         list->tail = newToken;
 }
+
+void hkDeleteTokenList(HkTokenList *list)
+{
+        _HkTokenListNode *it = list->head;
+        while (it != NULL) {
+                _HkTokenListNode *next = it->next;
+
+                // may have to delete node's content
+                if (it->data.data)
+                        free(it->data.data);
+
+                free(it);
+                it = next;
+        }
+}

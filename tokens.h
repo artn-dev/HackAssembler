@@ -71,6 +71,15 @@ HkTokenList hkCreateTokenList();
  */
 void hkAddToken(HkTokenList *list, HkToken token);
 
+/**
+ * Deletes a list of tokens.
+ * This functions iterates through the list deleting
+ * all allocated nodes and dynamically allocated data
+ * within them.
+ * @param list list object to be deleted
+ */
+void hkDeleteTokenList(HkTokenList *list);
+
 HkToken hkReadToken(FILE *file);
 
 #endif /* HACK_TOKENS_H */
