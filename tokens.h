@@ -20,7 +20,7 @@ enum HkTokenType {
  * The token assigns a group of characters read from a file to a type of
  * object recognizable by the parser.
  */
-struct HkToken_t {
+typedef struct HkToken {
         /**
          * The token's type.
          * A object type recognizable by the parser.
@@ -33,9 +33,7 @@ struct HkToken_t {
          * A group of characters read from a file.
          */
         char *data;
-};
-
-typedef struct HkToken_t HkToken;
+} HkToken;
 
 
 HkToken hkReadToken(FILE *file);
