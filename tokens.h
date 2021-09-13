@@ -35,6 +35,24 @@ typedef struct HkToken {
         char *data;
 } HkToken;
 
+/**
+ * Node of a linked list of tokens.
+ */
+typedef struct _HkTokenListNode {
+        _HkTokenListNode *next;
+        HkToken data;
+} _HkTokenListNode; 
+
+/**
+ * Linked list of tokens.
+ * This lists holds the tokens found by the program. All it's
+ * operations are to be made with helper functions.
+ */
+typedef struct HkTokenList {
+        _HkTokenListNode *head; /*< First token in list */
+        _HkTokenListNode *tail; /*< Last token in list */
+} HkTokenList;
+
 
 HkToken hkReadToken(FILE *file);
 
