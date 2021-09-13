@@ -20,16 +20,18 @@ int main(int argc, char** argv)
 	}
 
 	long int eof = getEOF(infile);
+	HkTokenList tokens = hkCreateTokenList();
+
 	while (ftell(infile) != eof) {
 		HkToken token = hkReadToken(infile);
+		hkAddToken(&tokens, token);
 
 		if (token.data != NULL) {
 			printf("Read: %s\n", token.data);
-			// prevent memory leaks during testing
-			free(token.data);
 		}
 	}
 
+	hkDeleteTokenList(&tokens);
 	fclose(infile);
 	exit(EXIT_SUCCESS);
 }
