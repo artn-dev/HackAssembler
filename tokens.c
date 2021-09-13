@@ -35,7 +35,7 @@ HkToken hkReadToken(FILE *file)
         case '|':
         case ';':
                 token.type = HK_OPERATOR;
-                token.data = (char*)malloc(2);
+                token.data = (char*)malloc(2 * sizeof(char));
                 token.data[0] = currCh;
                 token.data[1] = '\0';
                 break;
@@ -60,7 +60,7 @@ HkToken hkReadToken(FILE *file)
                 } while (isdigit(currCh));
 
                 // allocate memory in string
-                token.data = (char*)malloc(digitCount + 1);
+                token.data = (char*)malloc((digitCount + 1) * sizeof(char));
 
                 // return to beginning of number
                 long int offset = (currCh == EOF) ? 0 : 1;
@@ -85,7 +85,7 @@ HkToken hkReadToken(FILE *file)
                 } while (isalpha(currCh) || isdigit(currCh) || currCh == '_');
 
                 // allocate memory in string
-                token.data = (char*)malloc(charCount + 1);
+                token.data = (char*)malloc((charCount + 1) * sizeof(char));
 
                 // return to beginning of number
                 long int offset = (currCh == EOF) ? 0 : 1;
