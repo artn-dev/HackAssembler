@@ -1,4 +1,4 @@
-#include "tokens.h"
+#include <hack/tokens.h>
 #include <string.h>
 #include <stdlib.h>
 

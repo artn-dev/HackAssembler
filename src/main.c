@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tokens.h"
+#include <hack/tokens.h>
 
 long int getEOF(FILE* file)
 {
