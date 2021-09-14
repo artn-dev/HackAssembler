@@ -9,7 +9,7 @@
 HkToken hkReadToken(FILE *file)
 {
         HkToken token;
-        token.type = HK_WHITESPACE;
+        token.type = HK_TK_WHITESPACE;
         token.data = NULL;
 
         char currCh = fgetc(file);
@@ -23,7 +23,7 @@ HkToken hkReadToken(FILE *file)
 
         case '\n':
         case '\r':
-                token.type = HK_END_OF_STATEMENT;
+                token.type = HK_TK_END_OF_STATEMENT;
                 break;
 
         case '@':
@@ -34,7 +34,7 @@ HkToken hkReadToken(FILE *file)
         case '&':
         case '|':
         case ';':
-                token.type = HK_OPERATOR;
+                token.type = HK_TK_OPERATOR;
                 token.data = (char*)malloc(2 * sizeof(char));
                 token.data[0] = currCh;
                 token.data[1] = '\0';
@@ -50,7 +50,7 @@ HkToken hkReadToken(FILE *file)
         case '7':
         case '8':
         case '9': {
-                token.type = HK_INTEGER_LITERAL;
+                token.type = HK_TK_INTEGER_LITERAL;
 
                 // find number of digits
                 long int digitCount = 0;
@@ -75,7 +75,7 @@ HkToken hkReadToken(FILE *file)
                 if (!(isalpha(currCh) || currCh == '_'))
                         break;
 
-                token.type = HK_IDENTIFIER;
+                token.type = HK_TK_IDENTIFIER;
 
                 // find number of characters
                 long int charCount = 0;

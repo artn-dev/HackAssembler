@@ -8,11 +8,11 @@
  * Represents the differents types of tokens.
  */
 enum HkTokenType {
-        HK_WHITESPACE,
-        HK_OPERATOR,
-        HK_INTEGER_LITERAL,
-        HK_IDENTIFIER,
-        HK_END_OF_STATEMENT,
+        HK_TK_WHITESPACE,
+        HK_TK_OPERATOR,
+        HK_TK_INTEGER_LITERAL,
+        HK_TK_IDENTIFIER,
+        HK_TK_END_OF_STATEMENT,
 };
 
 /**
