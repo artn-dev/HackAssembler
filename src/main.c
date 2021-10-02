@@ -37,8 +37,10 @@ int main(int argc, char** argv)
 	HkStatement statement;
 	for (it = tokens.head; it->next != NULL; it = it->next) {
 		it = hkParseBinaryOp(it, &statement);
+		hkDeleteStatement(&statement);		// for testing only
 	}
 	hkParseBinaryOp(it, &statement);
+	hkDeleteStatement(&statement);		// for testing only
 
 	hkDeleteTokenList(&tokens);
 	fclose(infile);
