@@ -1,6 +1,8 @@
 #ifndef HACK_STATEMENT_H
 #define HACK_STATEMENT_H
 
+#include <stdlib.h>
+
 
 /**
  * Represents different types of statements.
@@ -33,5 +35,7 @@ typedef struct HkStatement {
                 };
         };
 } HkStatement;
+
+void hkDeleteStatement(HkStatement *statement);
 
 #endif /* HACK_STATEMENT_H */
