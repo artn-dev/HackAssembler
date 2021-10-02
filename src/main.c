@@ -27,10 +27,6 @@ int main(int argc, char** argv)
 	while (ftell(infile) != eof) {
 		HkToken token = hkReadToken(infile);
 		hkAddToken(&tokens, token);
-
-		if (token.data != NULL) {
-			printf("Read: %s\n", token.data);
-		}
 	}
 
 	_HkTokenListNode *it;
