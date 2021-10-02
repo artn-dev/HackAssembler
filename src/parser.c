@@ -3,7 +3,9 @@
 
 _HkTokenListNode *hkParseLiteral(_HkTokenListNode *token, HkStatement *statement)
 {
-        statement->type = HK_ST_LITERAL;
-        statement->value = token->data.data;
+        if (token->data.type == HK_TK_IDENTIFIER) {
+                statement->type = HK_ST_LITERAL;
+                statement->value = token->data.data;
+        }
         return token->next;
 }
