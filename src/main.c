@@ -12,7 +12,7 @@ long int getEOF(FILE* file)
 
 int main(int argc, char** argv)
 {
-	FILE* infile = fopen("programs/Add.asm", "r");
+	FILE* infile = fopen("programs/Test-Parser.asm", "r");
 
 	if (infile == NULL) {
 		printf("Error! Couldn't open file\n");
