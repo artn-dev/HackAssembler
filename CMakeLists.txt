@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 set(CMAKE_C_COMPILER gcc)
-add_compile_options(-Wall -Wextra)
+add_compile_options(-Wall -Wextra -g)
 
 project(HackAssembler)
 
