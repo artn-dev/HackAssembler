@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <hack/tokens.h>
+#include <hack/statement.h>
+#include <hack/parser.h>
 
 long int getEOF(FILE* file)
 {
@@ -28,6 +30,15 @@ int main(int argc, char** argv)
 
 		if (token.data != NULL) {
 			printf("Read: %s\n", token.data);
+		}
+	}
+
+	_HkTokenListNode *it = tokens.head;
+	while (it != NULL) {
+		HkStatement statement;
+		it = hkParseLiteral(it, &statement);
+		if (statement.value != NULL) {
+			printf("Parsed: %s\n", statement.value);
 		}
 	}
 
