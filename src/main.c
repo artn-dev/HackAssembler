@@ -33,14 +33,12 @@ int main(int argc, char** argv)
 		}
 	}
 
-	_HkTokenListNode *it = tokens.head;
-	while (it != NULL) {
-		HkStatement statement;
-		it = hkParseLiteral(it, &statement);
-		if (statement.value != NULL) {
-			printf("Parsed: %s\n", statement.value);
-		}
+	_HkTokenListNode *it;
+	HkStatement statement;
+	for (it = tokens.head; it->next != NULL; it = it->next) {
+		it = hkParseBinaryOp(it, &statement);
 	}
+	hkParseBinaryOp(it, &statement);
 
 	hkDeleteTokenList(&tokens);
 	fclose(infile);
