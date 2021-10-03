@@ -27,7 +27,7 @@ _HkTokenListNode *hkParseBinaryOp(_HkTokenListNode *token, HkStatement *statemen
         statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
 
         statement->params[0] = lhs;
-        token = hkParseLiteral(token->next, statement->params + 1);
+        token = hkParseBinaryOp(token->next, statement->params + 1);
 
         return token;
 }
