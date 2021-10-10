@@ -14,15 +14,27 @@ _HkTokenListNode *hkParseLiteral(_HkTokenListNode *token, HkStatement *statement
 
 _HkTokenListNode *hkParseBinaryOp(_HkTokenListNode *token, HkStatement *statement)
 {
-        HkStatement lhs;
-        token = hkParseLiteral(token, &lhs);
+        statement->type = HK_ST_BIN_OP;
+        statement->paramCount = 2;
+        statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
+
+	token = hkParseLiteral(token, statement->params + 0);
+	token = hkParseLiteral(token->next, statement->params + 1);
+
+	return token;
+}
+
+_HkTokenListNode *hkParseAssignment(_HkTokenListNode *token, HkStatement *statement)
+{
+	HkStatement lhs;
+	token = hkParseLiteral(token, &lhs);
 
         if (token == NULL || token->data.type == HK_TK_END_OF_STATEMENT) {
                 *statement = lhs;
                 return token;
         }
 
-        statement->type = HK_ST_BIN_OP;
+        statement->type = HK_ST_ASSIGNMENT;
         statement->paramCount = 2;
         statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
 

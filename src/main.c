@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 	_HkTokenListNode *it;
 	HkStatement statement;
 	for (it = tokens.head; it->next != NULL; it = it->next) {
-		it = hkParseBinaryOp(it, &statement);
+		it = hkParseAssignment(it, &statement);
 		hkDeleteStatement(&statement);		// for testing only
 	}
 	hkParseBinaryOp(it, &statement);
