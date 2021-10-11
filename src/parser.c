@@ -39,7 +39,19 @@ _HkTokenListNode *hkParseAssignment(_HkTokenListNode *token, HkStatement *statem
         statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
 
         statement->params[0] = lhs;
-        token = hkParseBinaryOp(token->next, statement->params + 1);
+        token = hkParseJump(token->next, statement->params + 1);
+
+        return token;
+}
+
+_HkTokenListNode *hkParseJump(_HkTokenListNode *token, HkStatement *statement)
+{
+        statement->type = HK_ST_JUMP;
+        statement->paramCount = 2;
+        statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
+
+        token = hkParseBinaryOp(token, statement->params + 0);
+        token = hkParseLiteral(token->next, statement->params + 1);
 
         return token;
 }

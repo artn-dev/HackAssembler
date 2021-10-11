@@ -11,6 +11,7 @@ enum HkStatementType {
         HK_ST_LITERAL,
         HK_ST_BIN_OP,
 	HK_ST_ASSIGNMENT,
+	HK_ST_JUMP,
 };
 
 /**

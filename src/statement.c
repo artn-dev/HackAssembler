@@ -27,6 +27,7 @@ void hkDeleteStatement(HkStatement *statement)
 
         case HK_ST_BIN_OP:
 	case HK__ST_ASSIGNMENT:
+	case HK_ST_JUMP:
                 hkDeleteBinaryOp(statement);
                 break;
         }
