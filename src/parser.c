@@ -14,12 +14,20 @@ HkToken *hkParseLiteral(HkToken *token, HkStatement *statement)
 
 HkToken *hkParseBinaryOp(HkToken *token, HkStatement *statement)
 {
+        HkStatement lhs;
+        token = hkParseLiteral(token, &lhs);
+
+        if (token->type == HK_TK_END_OF_STATEMENT) {
+                *statement = lhs;
+                return token;
+        }
+
         statement->type = HK_ST_BIN_OP;
         statement->paramCount = 2;
         statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
 
-	token = hkParseLiteral(token, statement->params + 0);
-	token = hkParseLiteral(token + 1, statement->params + 1);
+        statement->params[0] = lhs;
+        token = hkParseLiteral(token + 1, statement->params + 1);
 
 	return token;
 }
@@ -29,9 +37,14 @@ HkToken *hkParseAssignment(HkToken *token, HkStatement *statement)
 	HkStatement lhs;
 	token = hkParseLiteral(token, &lhs);
 
-        if (token == NULL || token->type == HK_TK_END_OF_STATEMENT) {
+        if (token->type == HK_TK_END_OF_FILE) {
                 *statement = lhs;
                 return token;
+        }
+
+        if (token == NULL || token->type == HK_TK_END_OF_STATEMENT) {
+                *statement = lhs;
+                return token + 1;
         }
 
         statement->type = HK_ST_ASSIGNMENT;
@@ -46,13 +59,20 @@ HkToken *hkParseAssignment(HkToken *token, HkStatement *statement)
 
 HkToken *hkParseJump(HkToken *token, HkStatement *statement)
 {
+        HkStatement lhs;
+        token = hkParseBinaryOp(token, &lhs);
+
+        if (token->type == HK_TK_END_OF_STATEMENT) {
+                *statement = lhs;
+                return token + 1;
+        }
+
         statement->type = HK_ST_JUMP;
         statement->paramCount = 2;
         statement->params = (HkStatement*)malloc(2 * sizeof(HkStatement));
 
-        token = hkParseBinaryOp(token, statement->params + 0);
-        if (token->type != HK_TK_END_OF_STATEMENT)
-                token = hkParseLiteral(token + 1, statement->params + 1);
+        statement->params[0] = lhs;
+        token = hkParseLiteral(token + 1, statement->params + 1);
 
         return token + 1;
 }
