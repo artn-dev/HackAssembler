@@ -26,22 +26,25 @@ int main(int argc, char** argv)
 
 	long int eof = getEOF(infile);
 	HkToken *tokens = (HkToken*)malloc(BUFFER_SIZE * sizeof(HkToken));
-	unsigned int i = 0;
+	unsigned int tokenCount = 0;
 
 	while (ftell(infile) != eof) {
-		tokens[i] = hkReadToken(infile);
-		i++;
+		tokens[tokenCount] = hkReadToken(infile);
+		tokenCount++;
 	}
-	unsigned int tokenCount = i;
+	tokens[tokenCount] = hkFinalToken();
 
 	HkStatement *statements = (HkStatement*)malloc(BUFFER_SIZE * sizeof(HkStatement));
 	HkToken *it = tokens;
-	for (i = 0; i < BUFFER_SIZE; i++) {
-		it = hkParseAssignment(it, statements + i);
+
+	unsigned int statementCount = 0;
+	while (it->type != HK_TK_END_OF_FILE) {
+		it = hkParseAssignment(it, statements + statementCount);
+		statementCount++;
 	}
 
 	// cleanup tokens
-	for (i = 0; i < tokenCount; i++) {
+	for (unsigned int i = 0; i < tokenCount; i++) {
 		if (tokens[i].data)
 			free(tokens[i].data);
 	}
