@@ -13,6 +13,7 @@ enum HkTokenType {
         HK_TK_INTEGER_LITERAL,
         HK_TK_IDENTIFIER,
         HK_TK_END_OF_STATEMENT,
+        HK_TK_END_OF_FILE,
 };
 
 /**
@@ -36,6 +37,7 @@ typedef struct HkToken {
 } HkToken;
 
 
+HkToken hkFinalToken();
 HkToken hkReadToken(FILE *file);
 
 #endif /* HACK_TOKENS_H */

@@ -98,3 +98,11 @@ HkToken hkReadToken(FILE *file)
 
         return token;
 }
+
+HkToken hkFinalToken()
+{
+        HkToken token;
+        token.type = HK_TK_END_OF_FILE;
+        token.data = NULL;
+        return token;
+}
