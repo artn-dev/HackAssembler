@@ -7,13 +7,10 @@
 #define BUFFER_SIZE 20
 
 
-long int getEOF(FILE* file)
-{
-	fseek(file, 0, SEEK_END);
-	long int eof = ftell(file);
-	fseek(file, 0, SEEK_SET);
-	return eof;
-}
+static HkToken *cleanupTokens(HkToken *tokens, unsigned long count);
+static HkStatement *cleanupStatements(HkStatement *statements, unsigned long count);
+static long int getEOF(FILE* file);
+
 
 int main(int argc, char** argv)
 {
@@ -25,8 +22,9 @@ int main(int argc, char** argv)
 	}
 
 	long int eof = getEOF(infile);
+
 	HkToken *tokens = (HkToken*)malloc(BUFFER_SIZE * sizeof(HkToken));
-	unsigned int tokenCount = 0;
+	unsigned long tokenCount = 0;
 
 	while (ftell(infile) != eof) {
 		tokens[tokenCount] = hkReadToken(infile);
@@ -35,28 +33,45 @@ int main(int argc, char** argv)
 	tokens[tokenCount] = hkFinalToken();
 
 	HkStatement *statements = (HkStatement*)malloc(BUFFER_SIZE * sizeof(HkStatement));
-	HkToken *it = tokens;
+	unsigned long statementCount = 0;
 
-	unsigned int statementCount = 0;
+	HkToken *it = tokens;
 	while (it->type != HK_TK_END_OF_FILE) {
 		it = hkParseAssignment(it, statements + statementCount);
 		statementCount++;
 	}
 
-	// cleanup tokens
-	for (unsigned int i = 0; i < tokenCount; i++) {
+	tokens = cleanupTokens(tokens, tokenCount);
+	statements = cleanupStatements(statements, statementCount);
+	fclose(infile);
+
+	exit(EXIT_SUCCESS);
+}
+
+
+HkToken *cleanupTokens(HkToken *tokens, unsigned long count)
+{
+	for (unsigned int i = 0; i < count; i++) {
 		if (tokens[i].data)
 			free(tokens[i].data);
 	}
 	free(tokens);
+	return NULL;
+}
 
-	// cleanup statements
-	for (unsigned int i = 0; i < statementCount; i++) {
+HkStatement *cleanupStatements(HkStatement *statements, unsigned long count)
+{
+	for (unsigned int i = 0; i < count; i++) {
 		hkDeleteStatement(statements + i);
 	}
 	free(statements);
+	return NULL;
+}
 
-	fclose(infile);
-
-	exit(EXIT_SUCCESS);
+long int getEOF(FILE* file)
+{
+	fseek(file, 0, SEEK_END);
+	long int eof = ftell(file);
+	fseek(file, 0, SEEK_SET);
+	return eof;
 }
