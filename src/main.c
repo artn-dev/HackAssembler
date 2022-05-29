@@ -4,6 +4,9 @@
 #include <hack/statement.h>
 #include <hack/parser.h>
 
+#define BUFFER_SIZE 20
+
+
 long int getEOF(FILE* file)
 {
 	fseek(file, 0, SEEK_END);
@@ -22,23 +25,16 @@ int main(int argc, char** argv)
 	}
 
 	long int eof = getEOF(infile);
-	HkTokenList tokens = hkCreateTokenList();
+	HkToken *tokens = (HkToken*)malloc(BUFFER_SIZE * sizeof(HkToken));
+	unsigned int i = 0;
 
 	while (ftell(infile) != eof) {
-		HkToken token = hkReadToken(infile);
-		hkAddToken(&tokens, token);
+		tokens[i] = hkReadToken(infile);
+		i++;
 	}
 
-	_HkTokenListNode *it;
-	HkStatement statement;
-	for (it = tokens.head; it->next != NULL; it = it->next) {
-		it = hkParseAssignment(it, &statement);
-		hkDeleteStatement(&statement);		// for testing only
-	}
-	hkParseBinaryOp(it, &statement);
-	hkDeleteStatement(&statement);		// for testing only
-
-	hkDeleteTokenList(&tokens);
+	free(tokens);
 	fclose(infile);
+
 	exit(EXIT_SUCCESS);
 }
