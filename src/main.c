@@ -50,6 +50,12 @@ int main(int argc, char** argv)
 	}
 	free(tokens);
 
+	// cleanup statements
+	for (unsigned int i = 0; i < statementCount; i++) {
+		hkDeleteStatement(statements + i);
+	}
+	free(statements);
+
 	fclose(infile);
 
 	exit(EXIT_SUCCESS);
