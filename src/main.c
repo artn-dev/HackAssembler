@@ -32,12 +32,20 @@ int main(int argc, char** argv)
 		tokens[i] = hkReadToken(infile);
 		i++;
 	}
+	unsigned int tokenCount = i;
 
 	HkStatement *statements = (HkStatement*)malloc(BUFFER_SIZE * sizeof(HkStatement));
 	HkToken *it = tokens;
 	for (i = 0; i < BUFFER_SIZE; i++) {
 		it = hkParseAssignment(it, statements + i);
 	}
+
+	// cleanup tokens
+	for (i = 0; i < tokenCount; i++) {
+		if (tokens[i].data)
+			free(tokens[i].data);
+	}
+	free(tokens);
 
 	fclose(infile);
 
