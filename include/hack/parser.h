@@ -4,9 +4,9 @@
 #include <hack/tokens.h>
 #include <hack/statement.h>
 
-_HkTokenListNode *hkParseLiteral(_HkTokenListNode *token, HkStatement *statement);
-_HkTokenListNode *hkParseBinaryOp(_HkTokenListNode *token, HkStatement *statement);
-_HkTokenListNode *hkParseAssignment(_HkTokenListNode *token, HkStatement *statement);
-_HkTokenListNode *hkParseJump(_HkTokenListNode *token, HkStatement *statement);
+HkToken *hkParseLiteral(HkToken *token, HkStatement *statement);
+HkToken *hkParseBinaryOp(HkToken *token, HkStatement *statement);
+HkToken *hkParseAssignment(HkToken *token, HkStatement *statement);
+HkToken *hkParseJump(HkToken *token, HkStatement *statement);
 
 #endif /* HACK_PARSER_H */

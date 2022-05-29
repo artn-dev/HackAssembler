@@ -33,7 +33,12 @@ int main(int argc, char** argv)
 		i++;
 	}
 
-	free(tokens);
+	HkStatement *statements = (HkStatement*)malloc(BUFFER_SIZE * sizeof(HkStatement));
+	HkToken *it = tokens;
+	for (i = 0; i < BUFFER_SIZE; i++) {
+		it = hkParseAssignment(it, statements + i);
+	}
+
 	fclose(infile);
 
 	exit(EXIT_SUCCESS);
