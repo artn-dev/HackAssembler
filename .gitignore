@@ -1,2 +1,4 @@
 HackAssembler
 *.o
+build/
+.vscode/
