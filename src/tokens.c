@@ -87,11 +87,11 @@ HkToken hkReadToken(FILE *file)
                 // allocate memory in string
                 token.data = (char*)malloc((charCount + 1) * sizeof(char));
 
-                // return to beginning of number
+                // return to beginning of word
                 long int offset = (currCh == EOF) ? 0 : 1;
                 fseek(file, -charCount - offset, SEEK_CUR);
 
-                // read digits
+                // read characters
                 fread(token.data, sizeof(char), charCount, file);
                 }
         }
